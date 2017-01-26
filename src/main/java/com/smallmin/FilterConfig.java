@@ -22,7 +22,6 @@ public class FilterConfig {
 	    characterEncodingFilter.setForceEncoding(true);
 	    characterEncodingFilter.setEncoding("UTF-8");
 	    registrationBean.setFilter(characterEncodingFilter);
-	    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	    return registrationBean;
 	}
 }

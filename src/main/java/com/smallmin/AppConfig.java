@@ -9,7 +9,8 @@ public class AppConfig {
 	static String appDataFolder = "C:/smallminData/";
 	
 	//以下为相应数据子目录
-	static String topicContentPath=appDataFolder+"topic/"; //帖子内容
+	static String topicContentPath=appDataFolder+"topic/content/"; //帖子内容
+	static String topicIntroductionPath=appDataFolder+"topic/introduction/"; //帖子介绍
 	static String imageContentPath=appDataFolder+"img/"; //图片
 	
 	
