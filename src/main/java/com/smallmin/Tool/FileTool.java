@@ -1,16 +1,21 @@
 package com.smallmin.Tool;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import aj.org.objectweb.asm.ByteVector;
 
 /** 
 * @author jmlu
 * @version 2017年1月26日 下午3:45:20 
 *  
 */
-public class CreateUnicodeFile {
+public class FileTool {
 	
 	static private String getUUID(){
 		//用唯一识别码作为文件名
@@ -48,13 +53,29 @@ public class CreateUnicodeFile {
 		}
 		return false;
 	}
-	public static String createFile(String path,String content,String name){
+	public static boolean createFile(String path,String content,String name){
 		//创建文件的同时，写入文件内容，返回文件名，若为null说明失败
 		File file=createFile(path,name);
 		if(overlapFile(file,content)){
 			System.out.println("!!!");
-			return file.getName();
+			return true;
 		}
+		return false;
+	}
+	
+	public static String readFile(String path,String name){
+		File file = new File(path+name);
+		
+		try {
+			FileInputStream fio = new FileInputStream(file);
+			byte[] data = new byte[(int) file.length()];
+			fio.read(data);
+			String content = new String(data);
+			return content;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 }

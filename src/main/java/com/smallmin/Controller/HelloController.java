@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.smallmin.Api.TopicApi;
+
 /** 
 * @author jmlu
 * @version 2017年1月28日 下午6:35:21 
@@ -17,6 +19,14 @@ public class HelloController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String test(HttpServletRequest requset, Model model){
-		return "index";
+		return "editor";
 	}
+	
+	@RequestMapping(value="/preview", method = RequestMethod.GET)
+	public String getPreview(HttpServletRequest requset, Model model){
+		TopicApi topicApi = new TopicApi();
+		model.addAttribute("content", topicApi.test(1));
+		return "preview";
+	}
+	
 }

@@ -214,7 +214,7 @@
 .wangEditor-container .wangEditor-txt h4,
 .wangEditor-container .wangEditor-txt h5 {
   margin: 10px 0;
-  line-height: 1.8;
+  line-height: 1.0;
 }
 .wangEditor-container .wangEditor-txt p *,
 .wangEditor-container .wangEditor-txt h1 *,
@@ -222,11 +222,14 @@
 .wangEditor-container .wangEditor-txt h3 *,
 .wangEditor-container .wangEditor-txt h4 *,
 .wangEditor-container .wangEditor-txt h5 * {
-  line-height: 1.8;
+  line-height: 1.0;
+}
+.wangEditor-container .wangEditor-txt li  {
+  line-height: 1.5;
 }
 .wangEditor-container .wangEditor-txt ul,
 .wangEditor-container .wangEditor-txt ol {
-  padding-left: 20px;
+  padding-left: 40px;
 }
 .wangEditor-container .wangEditor-txt img {
   cursor: pointer;

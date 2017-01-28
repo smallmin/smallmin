@@ -1,3 +1,5 @@
+//isOnWebsite 设置为true，图片直接保存在content中.
+//全局配置 
 (function (factory) {
     if (typeof window.define === 'function') {
         if (window.define.amd) {
@@ -87,7 +89,7 @@
     E.w3cRange = typeof document.createRange === 'function';
     E.hostname = location.hostname.toLowerCase();
     E.websiteHost = 'wangeditor.github.io|www.wangeditor.com|wangeditor.coding.me';
-    E.isOnWebsite = E.websiteHost.indexOf(E.hostname) >= 0;
+    E.isOnWebsite = true; //E.websiteHost.indexOf(E.hostname) >= 0;
     E.docsite = 'http://www.kancloud.cn/wangfupeng/wangeditor2/113961';
 
     // 暴露给全局对象
@@ -3195,10 +3197,10 @@ _e(function (E, $) {
     E.config = {};
 
     // 全屏时的 z-index
-    E.config.zindex = 10000;
+    E.config.zindex = 65535;
 
     // 是否打印log
-    E.config.printLog = true;
+    E.config.printLog = false;
 
     // 菜单吸顶：false - 不吸顶；number - 吸顶，值为top值
     E.config.menuFixed = 0;
@@ -3227,6 +3229,7 @@ _e(function (E, $) {
         'quote',
         'fontfamily',
         'fontsize',
+        'lineheight',
         'head',
         'unorderlist',
         'orderlist',
@@ -3307,54 +3310,6 @@ _e(function (E, $) {
                 {
                     icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
                     value: '[神马]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                    value: '[浮云]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                    value: '[给力]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                    value: '[围观]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                    value: '[威武]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
-                    value: '[熊猫]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
-                    value: '[兔子]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
-                    value: '[奥特曼]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
-                    value: '[囧]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
-                    value: '[互粉]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
-                    value: '[礼物]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
-                    value: '[呵呵]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
-                    value: '[哈哈]'
                 }
             ]
         }
@@ -3365,18 +3320,18 @@ _e(function (E, $) {
 
     // 上传图片的配置
     // server地址
-    E.config.uploadImgUrl = '';
+    E.config.uploadImgUrl = '/';
     // 超时时间
-    E.config.uploadTimeout = 20 * 1000;
+    E.config.uploadTimeout = 5 * 1000;
     // 用于存储上传回调事件
     E.config.uploadImgFns = {};
     // 自定义上传图片的filename
-    // E.config.uploadImgFileName = 'customFileName';
+     E.config.uploadImgFileName = 'myFileName';
 
     // 自定义上传，设置为 true 之后，显示上传图标
-    E.config.customUpload = false;
+     E.config.customUpload = false;
     // 自定义上传的init事件
-    // E.config.customUploadInit = function () {....};
+     E.config.customUploadInit = function () {};
 
     // 自定义上传时传递的参数（如 token）
     E.config.uploadParams = {
@@ -3392,13 +3347,13 @@ _e(function (E, $) {
     E.config.hideLinkImg = false;
 
     // 是否过滤粘贴内容
-    E.config.pasteFilter = true;
+    E.config.pasteFilter = false;
 
     // 是否粘贴纯文本，当 editor.config.pasteFilter === false 时候，此配置将失效
     E.config.pasteText = false;
 
     // 插入代码时，默认的语言
-    E.config.codeDefaultLang = 'javascript';
+    E.config.codeDefaultLang = 'java';
 
 });
 // 全局UI
@@ -5318,7 +5273,6 @@ _e(function (E, $) {
             if (uploadImgUrl || customUpload) {
                 // 第一，暴露出 $uploadContent 以便用户自定义 ！！！重要
                 editor.$uploadContent = $uploadContent;
-
                 // 第二，绑定tab切换事件
                 tabToggle();
 
