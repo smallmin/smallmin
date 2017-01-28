@@ -19,11 +19,12 @@ public class AppFirst implements CommandLineRunner  {
 	TagService tagService;
 	
 	public void run(String... args) throws Exception {
-		System.out.println(">>>>>>>>>>>>> Data initialize >>>>>>>>>>>>>");
-		System.out.println(">>>>>>>>>>>>> load tags");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Data initialize: >>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> load tags");
 		for(Tag tag : tagService.getAll()){
 			App.tags.put(tag.getId(), tag);
 		}
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Initialize ended. >>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
 
 }

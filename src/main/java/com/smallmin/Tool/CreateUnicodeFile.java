@@ -12,14 +12,13 @@ import java.io.IOException;
 */
 public class CreateUnicodeFile {
 	
-	static private String getFileName(){
+	static private String getUUID(){
 		//用唯一识别码作为文件名
 		return  java.util.UUID.randomUUID().toString().replaceAll("-", ""); 
 	}
 	
-	public static File createFile(String path){
+	public static File createFile(String path,String name){
 		//如果文件不存在，创建相应的目录和文件，返回文件，失败返回null
-		String name = getFileName();
 		File file = new File(path+name);
 		if(!file.getParentFile().exists()) {  
 			//如果父目录不存在，先创建目录
@@ -49,10 +48,11 @@ public class CreateUnicodeFile {
 		}
 		return false;
 	}
-	public static String createFile(String path,String content){
+	public static String createFile(String path,String content,String name){
 		//创建文件的同时，写入文件内容，返回文件名，若为null说明失败
-		File file=createFile(path);
+		File file=createFile(path,name);
 		if(overlapFile(file,content)){
+			System.out.println("!!!");
 			return file.getName();
 		}
 		return null;

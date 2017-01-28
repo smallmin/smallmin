@@ -25,35 +25,35 @@ public class TagApi {
 	@Autowired
 	TagService tagService;
 	
-	@RequestMapping(value = "/api/tags")
+	@RequestMapping(value = "/api/tag")
 	public Collection<Tag> getAll() {
 		return App.tags.values();
 	}
 	
-	@RequestMapping(value = "/api/tags/size")
+	@RequestMapping(value = "/api/tag/size")
 	public int getSize() {
 		return App.tags.size();
 	}
 	
-	@RequestMapping(value = "/api/tags/{id}")
+	@RequestMapping(value = "/api/tag/{id}")
 	public Tag getOne(@PathVariable("id") int id) {
 		return App.tags.get(id);
 	}
 	
-	@RequestMapping(value = "/api/tags" ,method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/tag" ,method = RequestMethod.PUT)
 	public Tag update(@RequestBody Tag tag) {
 		App.tags.put(tag.getId(), tag);
 		return tagService.update(tag);
 	}
 	
-	@RequestMapping(value = "/api/tags" ,method = RequestMethod.POST)
+	@RequestMapping(value = "/api/tag" ,method = RequestMethod.POST)
 	public Tag add(@RequestBody Tag tag) {
 		Tag temp = tagService.add(tag); //此处需要temp，以防request带了id
 		App.tags.put(temp.getId(), temp);
 		return temp;
 	}
 	
-	@RequestMapping(value = "/api/tags/{id}" ,method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/tag/{id}" ,method = RequestMethod.DELETE)
 	public void add(@PathVariable("id") int id) {
 		App.tags.remove(id);
 		tagService.delete(id);
