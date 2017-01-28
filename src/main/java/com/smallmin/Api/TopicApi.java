@@ -32,11 +32,4 @@ public class TopicApi {
 		return topicService.getAll();
 	}
 	
-	@RequestMapping(value="api/topic/test" , method = RequestMethod.POST)
-	public String postContent(@RequestParam("content") String content){
-		System.out.println(content);
-		CreateUnicodeFile.createFile(AppConfig.topicContentPath, content,"1");
-		return content;
-	}
-	
 }

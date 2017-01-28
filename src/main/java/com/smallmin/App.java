@@ -3,7 +3,7 @@ package com.smallmin;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HelloController {
 	
-	@RequestMapping(value="/hello", method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String test(HttpServletRequest requset, Model model){
-		String name=requset.getParameter("name");
-	
-		model.addAttribute("message", name);
 		return "index";
 	}
 }
