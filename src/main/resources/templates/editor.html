@@ -58,8 +58,9 @@
 		
 		$('#insert').click(function(){
 		    var panel_html=editor.$txt.html();
-		    //alert($('#title').val());
-			$.post( "http://localhost:8080/api/topic", { "content": panel_html ,"title" : $('#title').val() } );
+		    if(panel_html.length>1920000)alert("    源码过大，检查是否上传了过大或过多的图片，图片总大小1M左右是可以接受的");
+		    //alert(panel_html.length);
+			$.post( "/api/topic", { "content": panel_html ,"title" : $('#title').val() } );
 			//alert(editor.$txt.html());
 		});
     </script>

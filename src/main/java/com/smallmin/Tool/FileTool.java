@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 
-import aj.org.objectweb.asm.ByteVector;
 
 /** 
 * @author jmlu
@@ -57,7 +55,6 @@ public class FileTool {
 		//创建文件的同时，写入文件内容，返回文件名，若为null说明失败
 		File file=createFile(path,name);
 		if(overlapFile(file,content)){
-			System.out.println("!!!");
 			return true;
 		}
 		return false;
@@ -65,7 +62,6 @@ public class FileTool {
 	
 	public static String readFile(String path,String name){
 		File file = new File(path+name);
-		
 		try {
 			FileInputStream fio = new FileInputStream(file);
 			byte[] data = new byte[(int) file.length()];
