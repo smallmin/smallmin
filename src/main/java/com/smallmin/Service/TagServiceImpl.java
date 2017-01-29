@@ -35,7 +35,7 @@ public class TagServiceImpl implements TagService {
 	}
 
 	public Tag getOne(Integer id) {
-		return null;
+		return tagDao.findOne(id);
 	}
 
 	public Collection<Tag> getAll() {

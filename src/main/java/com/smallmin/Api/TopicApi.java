@@ -43,6 +43,7 @@ public class TopicApi {
 		topic.setPriority(0);
 		topic.setTitle(requset.getParameter("title"));
 		topic.setAuthorId(1);
+		topic.setCategoryId(0);
 		if(FileTool.createFile(AppConfig.topicContentPath, requset.getParameter("content"), "1"))System.out.println(">>>>>>>>>>>>>>>>>>>> 文件 " +String.valueOf(topic.getId())+ " 创建成功");
 		return topicService.add(topic);
 	}

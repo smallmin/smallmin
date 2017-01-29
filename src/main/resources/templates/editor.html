@@ -1,68 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>SmllMin:Editor</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-   
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"/>
-    
-    <link rel="stylesheet" th:href="@{css/wangEditor.css}"/>
-	<link rel="stylesheet" th:href="@{css/code_github.css}"/>
-	
-	<script th:src="@{webjars/jquery/2.1.4/jquery.min.js}"></script>
-	
-	<script th:src="@{js/wangEditor.js}"></script>
-	<script th:src="@{js/custom-menu.js}"></script>
-	
-    <style type="text/css">
-        #editor-trigger {
-            height: 500px;
-            /*max-height: 500px;*/
-        }
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-        }
-        input{
-        	font-size:18px;
-        	width:1000px;
-        	margin: 10px 0 10px 5px;
-        }
-    </style>
+<title>SmllMin:Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{css/editor/wangEditor.css}" />
+<link rel="stylesheet" th:href="@{css/editor/code_github.css}" />
+
+<script th:src="@{webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script th:src="@{js/editor/wangEditor.js}"></script>
+<script th:src="@{js/editor/custom-menu.js}"></script>
+
+<style type="text/css">
+#editor-trigger {
+	height: 600px;
+	/*max-height: 500px;*/
+}
+
+input {
+	font-size: 18px;
+	width: 1000px;
+	margin: 10px 0 10px 5px;
+}
+</style>
 </head>
-<body style="padding:0 20px;">
-	<h2>Topic Panel   version 1.0</h2>
-	
+<body style="padding: 0 20px;">
+	<h2>Topic Panel version 1.0</h2>
+
 	<div style="font-size: 20px;">
-		Title: <input type="text" id="title"/>
+		Title: <input type="text" id="title" />
 	</div>
 	<div class="wangEditor-container">
 		<div id="editor-trigger">
 			<p>请输入内容</p>
 		</div>
-    </div>
-  
-	
-	<button id="insert" style="margin: 20px 0  0 0; padding: 10px;">Insert data to repository.</button>
-	<a href="/preview">
-		<button  style="margin: 20px 0  0 10px; padding: 10px;">View my insert</button>
-	</a>
- <script type="text/javascript">
-        var editor = new wangEditor('editor-trigger');
+	</div>
 
-        
-        editor.create();
-		
-		
-		
-		$('#insert').click(function(){
-		    var panel_html=editor.$txt.html();
-		    if(panel_html.length>1920000)alert("    源码过大，检查是否上传了过大或过多的图片，图片总大小1M左右是可以接受的");
-		    //alert(panel_html.length);
-			$.post( "/api/topic", { "content": panel_html ,"title" : $('#title').val() } );
+
+	<button id="insert" style="margin: 20px 0 0 0; padding: 10px;">Insert
+		data to repository.</button>
+	<a href="/preview">
+		<button style="margin: 20px 0 0 10px; padding: 10px;">View my
+			insert</button>
+	</a>
+	<script type="text/javascript">
+		var editor = new wangEditor('editor-trigger');
+
+		editor.create();
+
+		$('#insert').click(function() {
+			var panel_html = editor.$txt.html();
+			if (panel_html.length > 1920000)
+				alert("    源码过大，检查是否上传了过大或过多的图片，图片总大小1M左右是可以接受的");
+			//alert(panel_html.length);
+			$.post("/api/topic", {
+				"content" : panel_html,
+				"title" : $('#title').val()
+			});
 			//alert(editor.$txt.html());
 		});
-    </script>
+	</script>
 </body>
 </html>

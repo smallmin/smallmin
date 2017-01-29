@@ -15,13 +15,17 @@ import com.smallmin.Api.TopicApi;
 *  
 */
 @Controller
-public class HelloController {
+public class TopicController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String test(HttpServletRequest requset, Model model){
-		return "editor";
+		return "index";
 	}
 	
+	@RequestMapping(value="/editor", method = RequestMethod.GET)
+	public String editor(HttpServletRequest requset, Model model){
+		return "editor";
+	}
 	@RequestMapping(value="/preview", method = RequestMethod.GET)
 	public String getPreview(HttpServletRequest requset, Model model){
 		TopicApi topicApi = new TopicApi();

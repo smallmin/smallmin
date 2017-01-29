@@ -24,18 +24,21 @@ public class Topic {
 	
 	private String title;
 	private int authorId;
+	private int categoryId;
 	private int priority;
 	private Date editTime;
-	public Topic() {
-		super();
-	}
-	public Topic(int id, String title, int authorId, int priority, Date editTime) {
+	
+	public Topic(int id, String title, int authorId, int categoryId, int priority, Date editTime) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.authorId = authorId;
+		this.categoryId = categoryId;
 		this.priority = priority;
 		this.editTime = editTime;
+	}
+	public Topic() {
+		super();
 	}
 	public int getId() {
 		return id;
@@ -67,6 +70,10 @@ public class Topic {
 	public void setEditTime(Date editTime) {
 		this.editTime = editTime;
 	}
-	
-	
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 }

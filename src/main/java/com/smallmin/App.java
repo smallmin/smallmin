@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.smallmin.Enity.Tag;
+import com.smallmin.Enity.*;
 import com.smallmin.Service.TagService;
 
 /**
@@ -24,7 +24,7 @@ public class App
 	//实际上，因为博客数据量较小，整个数据库都可以一开始读进来..数据库的作用就是持久化存储数据
 	//每次增加数据的时候，别忘了在内存中的也要加数据
 	public static Map<Integer, Tag> tags = new HashMap<Integer, Tag>() ;
-
+	public static Map<Integer, Category> categorys = new HashMap<Integer, Category>() ;
 	
 	
 	
