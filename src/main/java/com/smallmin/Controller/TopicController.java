@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,10 +27,10 @@ public class TopicController {
 	public String editor(HttpServletRequest requset, Model model){
 		return "editor";
 	}
-	@RequestMapping(value="/preview", method = RequestMethod.GET)
-	public String getPreview(HttpServletRequest requset, Model model){
+	@RequestMapping(value="/preview/{id}", method = RequestMethod.GET)
+	public String getPreview(HttpServletRequest requset, Model model,@PathVariable("id") int id){
 		TopicApi topicApi = new TopicApi();
-		model.addAttribute("content", topicApi.test(1));
+		model.addAttribute("content", topicApi.getContentById(id));
 		return "preview";
 	}
 	

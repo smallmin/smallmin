@@ -38,18 +38,20 @@ public class TopicApi {
 	@RequestMapping(value="/api/topic", method = RequestMethod.POST)
 	public Topic test(HttpServletRequest requset){
 		Topic topic = new Topic();
-		topic.setId(1);
 		topic.setEditTime(new Date());
 		topic.setPriority(0);
 		topic.setTitle(requset.getParameter("title"));
 		topic.setAuthorId(1);
 		topic.setCategoryId(0);
-		if(FileTool.createFile(AppConfig.topicContentPath, requset.getParameter("content"), "1"))System.out.println(">>>>>>>>>>>>>>>>>>>> 文件 " +String.valueOf(topic.getId())+ " 创建成功");
-		return topicService.add(topic);
+		topic = topicService.add(topic);
+		
+		if(FileTool.createFile(AppConfig.topicContentPath, requset.getParameter("content"), String.valueOf(topic.getId())))
+			System.out.println(">>>>>>>>>>>>>>>>>>>> 文件 " +String.valueOf(topic.getId())+ " 创建成功");
+		return topic;
 	}
 	
 	@RequestMapping(value="/api/topic/content/{id}")
-	public String test(@PathVariable("id") int id){
+	public String getContentById(@PathVariable("id") int id){
 		return FileTool.readFile(AppConfig.topicContentPath, String.valueOf(id));
 	}
 }

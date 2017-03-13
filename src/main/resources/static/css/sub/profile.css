@@ -1,0 +1,91 @@
+.profile{
+	
+}
+
+.profile .pc-info {
+	padding:0;
+}
+
+
+.profile .pc-info .detail{
+	margin: 3px 11px 2px 11px;
+	padding:1px;
+}
+.profile .pc-info .number{
+	margin: 3px -11px 5px -11px;
+	padding:1px;
+}
+.profile .pc-info .detail{
+	background: #90bcec;
+	border-radius:3px;
+	color:white;
+}
+.profile .pc-info .number{
+	font-size:14px;
+	color:#111;
+}
+.profile .infos{
+	padding-top: 10px;
+}
+
+.profile .name{
+	color:#6666;
+	margin-top:7px;
+	width:100%;
+	text-align: center;
+	font-size: 22px;
+	font-weight:bold;
+}
+.profile .xs-name{
+	margin-top:10px;
+	font-size: 5vw;
+	font-weight: bold;
+}
+.profile .xs-info{
+	margin-top:5px;
+}
+.profile .xs-info .info_number{
+	font-size: 3vw;
+}
+.profile .xs-info .info_detail{
+	color:#BBB;
+	font-size: 3vw;
+}
+.profile #my-line{
+	height: 1px;
+	/*background: #DDD;
+	*/
+}
+.profile .xs-info-panel{
+	margin-top:6px;
+	padding-left:10px;
+}
+.profile .xs-info .info{
+	float:left;
+	width:25%;
+	text-align: left;
+	height: 10vw;
+	
+}
+.profile .xs-info .info.has_padding{
+	padding-left:3px;
+	
+}
+.profile .xs-info .info.has_border{
+	border-right: 1px solid #ddd;
+	
+}
+.profile .pc-info{
+	text-align: center;
+}
+
+.profile #head_img{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	min-width:110px;
+	border-radius: 50%;
+	box-shadow:0px 0px 1px #aaa;
+	
+}

@@ -2,3 +2,33 @@ body{
 	margin:0;
 	padding:0;
 }
+.myleft{
+	margin-top:10px;
+}
+.myright{
+	margin-top: 15px;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+.sheet{
+	margin-bottom:10px;
+	border: 1px solid #DDD;
+	border-radius: 3px;
+	padding: 8px 15px 8px 15px;
+	
+	box-shadow:0px 0px 1px #aaa;
+	
+}
+.title{
+	padding-bottom: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.square{
+	height: 20px;
+	width:20px;
+	margin-right:10px;
+	border-radius:5px;
+	background: #999;
+	float: left;
+}

@@ -29,6 +29,7 @@ public class AppFirst implements CommandLineRunner  {
 		}
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Successful");
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> load categorys");
+		System.out.println(categoryService.getAll().size());
 		for(Category category : categoryService.getAll()){
 			App.categorys.put(category.getId(), category);
 		}
