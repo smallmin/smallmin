@@ -516,11 +516,11 @@
 }
 @font-face {
   font-family: 'icomoon';
-  src: url('/fonts/icomoon.eot?-qdfu1s');
-  src: url('/fonts/icomoon.eot?#iefix-qdfu1s') format('embedded-opentype'),
-       url('/fonts/icomoon.ttf?-qdfu1s') format('truetype'),
-       url('/fonts/icomoon.woff?-qdfu1s') format('woff'),
-       url('/fonts/icomoon.svg?-qdfu1s#icomoon') format('svg');
+  
+  src: url('http://fonts-1252380644.file.myqcloud.com/fonts/icomoon.eot') format('embedded-opentype'),
+       url('http://fonts-1252380644.file.myqcloud.com/fonts/icomoon.ttf') format('truetype'),
+       url('http://fonts-1252380644.file.myqcloud.com/fonts/icomoon.woff') format('woff'),
+       url('http://fonts-1252380644.file.myqcloud.com/fonts/icomoon.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }

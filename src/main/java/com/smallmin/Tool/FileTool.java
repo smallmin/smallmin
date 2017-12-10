@@ -15,7 +15,7 @@ import java.io.IOException;
 */
 public class FileTool {
 	
-	static private String getUUID(){
+	static public String getUUID(){
 		//用唯一识别码作为文件名
 		return  java.util.UUID.randomUUID().toString().replaceAll("-", ""); 
 	}
