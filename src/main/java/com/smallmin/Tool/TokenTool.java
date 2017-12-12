@@ -26,12 +26,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smallmin.AppConfig;
 
 
-/** 
+/**  
 * @author Jimlu
 * @version 2017年12月10日 下午5:16:30 
 * 
 */
 public class TokenTool {
+	
+	static public String getUUID(){
+		return  java.util.UUID.randomUUID().toString().replaceAll("-", ""); 
+	}
 	
 	public static String encodeBase64(byte[]input) throws Exception{  
 	    Class clazz=Class.forName("com.sun.org.apache.xerces.internal.impl.dv.util.Base64");  
@@ -73,12 +77,12 @@ public class TokenTool {
 	}
 	
 	public static byte[] AES_encrypt(byte[] originBytes) throws Exception {            
-    	Cipher cipher = getAESCipher(AppConfig.secretKey.getBytes(),Cipher.ENCRYPT_MODE);
+    	Cipher cipher = getAESCipher(AppConfig.secretKey.getBytes("utf-8"),Cipher.ENCRYPT_MODE);
         return cipher.doFinal(originBytes);
 	}  
 	
 	public static byte[] AES_decrypt(byte[] cryptBytes) throws Exception {  
-    	Cipher cipher = getAESCipher(AppConfig.secretKey.getBytes(),Cipher.DECRYPT_MODE);             
+    	Cipher cipher = getAESCipher(AppConfig.secretKey.getBytes("utf-8"),Cipher.DECRYPT_MODE);             
         return cipher.doFinal(cryptBytes);   
 	}
 	
@@ -94,12 +98,12 @@ public class TokenTool {
 		return getMapByJson(jsonStr);
 	}
 	
-	public static String getMD5(String s) throws Exception {
+	public static String getMD5HexStr(String orginStr) throws Exception {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] bytes = md.digest(s.getBytes("utf-8"));
+        byte[] bytes = md.digest(orginStr.getBytes("utf-8"));
         return byteArrayToHex(bytes);
 	}
-
+	
 	public static String byteArrayToHex(byte[] bytes) throws Exception {
 	    final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
 	    StringBuilder ret = new StringBuilder(bytes.length * 2);

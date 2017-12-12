@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<title>testUser</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" charset="utf-8"/>
+		<link th:include="sub/headfile"/>
+		<script th:src="@{js/cos/cos-js-sdk-v4.js}"></script>
+		<script th:src="@{js/tool/md5.js}"></script>
+		<script th:src="@{js/user.js}"></script>
+	</head>
+	
+	<body>
+		<div class="container">
+			<input type="text" id="username"/> <br/>
+			<input type="password" id="password"/> <br/>
+			<input type="button" id="login" value="登陆"/>
+			<input type="button" id="testcos" value="testcos"/>
+		</div>
+	</body>
+</html>

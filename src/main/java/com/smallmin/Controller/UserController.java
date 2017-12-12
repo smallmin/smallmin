@@ -1,6 +1,5 @@
 package com.smallmin.Controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smallmin.AppConfig;
-import com.smallmin.Tool.FileTool;
+import com.smallmin.Tool.CosTools;
 import com.smallmin.Tool.TokenTool;
 
 /** 
@@ -28,22 +27,23 @@ import com.smallmin.Tool.TokenTool;
 @Controller
 public class UserController {
 	
-	
-	@RequestMapping(value="/user/getkey", method = RequestMethod.GET)
+	@RequestMapping(value="/user/tempsign", method = RequestMethod.GET)
 	@ResponseBody
-	public String getUserKey(HttpServletRequest requset,HttpServletResponse response){
+	public String getTempSign(HttpServletRequest requset,HttpServletResponse response){
 		try {
-			// 获取临时标记用于登陆,加密时用标记置乱,并标记登陆发起IP及时间
-			// 防止每次登录MD5码相同,标记有效10秒,且用于认证IP
+			// 获取临时标记用于登陆,加密时用以标记置乱,并标记登陆发起的IP及时间
+			// 作用：防止每次登录MD5码相同,拥有时效性，且保证了IP相同，有效时长为AppConfig.outTime
 			String addr = requset.getRemoteAddr();
-			String validTime = String.valueOf(new Date().getTime()/1000+AppConfig.outTime);
-			// 构造 info map
+			String validTime = String.valueOf(System.currentTimeMillis()/1000+AppConfig.outTime);
+			// 构造 info map, 记录IP和合法时间
 			Map<String,String> tempSign = new HashMap<String, String>();
 			tempSign.put("validTime", validTime);
 			tempSign.put("addr", addr);
 			// 根据 info map 加密得到 token
 			String tokenStr = TokenTool.getTokenByMap(tempSign);
 			// 加入 cookie
+			Cookie cookie = new Cookie("tempSign", tokenStr);
+			cookie.setMaxAge(AppConfig.outTime);
 			response.addCookie(new Cookie("tempSign",tokenStr));
 			return tokenStr;
 		}
@@ -55,40 +55,42 @@ public class UserController {
 	
 	@RequestMapping(value="/user/login", method = RequestMethod.POST)
 	@ResponseBody
-	public String getTestCOS(@RequestParam("postPass") String postPass, HttpServletRequest requset, HttpServletResponse response, Model model){
+	public String userLogin(@RequestParam("postPass") String postPass,
+							 @RequestParam("username") String username,
+							 HttpServletRequest requset,
+							 HttpServletResponse response){
 		try {
-			// POST 根据tempSign username password 生成好的MD5码,来验证登陆
-			// tempSign在cookie中，用于验证IP和时间
-			Cookie[] cookies = requset.getCookies();
-			String tokenStr = null;
-			for (Cookie c:cookies){
-				if(c.getName().equals("tempSign")) {
-					tokenStr = c.getValue();
-					break;
-				}
-			}
-			// 找不到tempSign,提示重试
-			if(tokenStr==null) return "failed by tempSign missing, please press F5 to fresh & try again";
-			// 根据 tempSign 解密得到 info map
-			Map tempSign = TokenTool.getMapByToken(tokenStr);
-			// 验证时间有效期，
-			long validTime = Long.valueOf((String) tempSign.get("validTime"));
-			long  currentTime = new Date().getTime()/1000;
-			if(currentTime>validTime) return "failed by time out (10 seconds), please try again";
-			// 如果IP改变，提示重试
-			String addr = (String) tempSign.get("addr");
-			if(!addr.equals(requset.getRemoteAddr())) return "failed of IP changed, please try again";
-			String truePass= TokenTool.getMD5(tokenStr+AppConfig.adminUser+TokenTool.getMD5(AppConfig.adminPass));
 			
+			System.out.println("username: " + username);
+			// 必须含cookie: tempSign
+			String tempSignStr = getCookieValue("tempSign", requset);
+			if(tempSignStr==null)
+				return "failed by tempSign missing, please press F5 to fresh and try again";
+			
+			// 解密token得到info map
+			Map tempSign = TokenTool.getMapByToken(tempSignStr);
+			
+			// 验证info map的地址和时间的合法性
+			if(!checkTime(tempSign))
+				return "failed by time out, please try again";
+			if(!checkAddr(tempSign, requset.getRemoteAddr()))
+				return "Ip changed, please press F5 to fresh and try again";
+			
+			// 验证帐号密码正确性
+			String realPass = getRealPass(username, tempSignStr);
+			if(!realPass.equals(postPass))
+				return "username or password wrong, please try again " + realPass;
+			
+			// 构造info Map
 			Map<String,String> userSign = new HashMap<String, String>();
-			userSign.put("addr", addr);
-			userSign.put("role", "admin");
-			userSign.put("validTime", String.valueOf(new Date().getTime()/1000+21600));
+			userSign.put("addr", requset.getRemoteAddr());
+			userSign.put("username", username);
+			userSign.put("validTime", String.valueOf(System.currentTimeMillis()/1000+AppConfig.loginValidTime));
+			String userSignToken = TokenTool.getTokenByMap(userSign);
+			response.addCookie(new Cookie("userSign", userSignToken));
 			
-			String userToken = TokenTool.getTokenByMap(userSign);
-			response.addCookie(new Cookie("userToken", userToken));
-			System.out.println(userToken);
-			return userToken;
+			System.out.println(userSignToken);
+			return userSignToken;
 		}
 		catch (Exception e) {
 			// 有非法情况发生,需加到日志,待完成
@@ -96,5 +98,73 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value="/user/cossign", method = RequestMethod.GET)
+	@ResponseBody
+	public String getCosSign(HttpServletRequest requset, HttpServletResponse response){
+		try {
+			// 必须含cookie: userSign
+			String userSignStr = getCookieValue("userSign", requset);
+			if(userSignStr==null)
+				return "please login first!";
+			
+			// 解密token得到info map
+			Map userSign = TokenTool.getMapByToken(userSignStr);
+			
+			// 验证info map的地址和时间的合法性
+			if(!checkTime(userSign))
+				return "failed by time out, please try again";
+			if(!checkAddr(userSign, requset.getRemoteAddr()))
+				return "Ip changed, please press F5 to fresh and try again";
+			
+			// 验证帐号权限
+			if(!userSign.get("username").equals(AppConfig.adminUser))
+				return "pleas login with admin accout!";
+			
+			// 返回一个有效期为AppConfig.outTime的cossign
+			return CosTools.getAuthorization(AppConfig.outTime);
+		}
+		catch (Exception e) {
+			// 有非法情况发生,需加到日志,待完成
+			return "failed by error, please concat to admin";
+		}
+	}
+	
+	@RequestMapping(value="/user", method = RequestMethod.GET)
+	public String getTestCOS(HttpServletRequest requset, HttpServletResponse response, Model model){
+		return "user";
+	}
+	
+	private String getCookieValue(final String cookieName, final HttpServletRequest request) {
+		// get cookie value from request by name
+		Cookie[] cookies = request.getCookies();
+		for (Cookie c:cookies)
+			if(c.getName().equals(cookieName)) 
+				return c.getValue();
+		return null;
+	}
+	
+	private boolean checkTime(final Map infoMap) {
+		// validate time in info map
+		String validTimeStr = (String) infoMap.get("validTime");
+		long validTime=0, currentTime = System.currentTimeMillis()/1000;
+		if(validTimeStr!=null) validTime = Long.valueOf(validTimeStr);
+		if(currentTime<=validTime)return true;
+		return false;	
+	}
+	
+	private boolean checkAddr(final Map infoMap, final String remoteAddr) {
+		// validate address in info map
+		String validAddr = (String) infoMap.get("addr");
+		if(validAddr.equals(remoteAddr))return true;
+		return false;	
+	}
+	
+	private String getRealPass(final String username, final String tempSignStr) throws Exception {
+		// 根据tempSign和username生成realPass
+		// 用户暂时只有admin, 没有数据库辅助
+		String userPasswordMD5HexStr = "userPassword_MD5_HexStr";
+		if(username.equals(AppConfig.adminUser)) userPasswordMD5HexStr = TokenTool.getMD5HexStr(AppConfig.adminPass);
+		return TokenTool.getMD5HexStr(tempSignStr + username + userPasswordMD5HexStr);
+	}
 	
 }

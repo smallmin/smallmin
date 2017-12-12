@@ -2,7 +2,6 @@ package com.smallmin.Tool;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -14,12 +13,7 @@ import java.io.IOException;
 *  
 */
 public class FileTool {
-	
-	static public String getUUID(){
-		//用唯一识别码作为文件名
-		return  java.util.UUID.randomUUID().toString().replaceAll("-", ""); 
-	}
-	
+
 	public static File createFile(String path,String name){
 		//如果文件不存在，创建相应的目录和文件，返回文件，失败返回null
 		File file = new File(path+name);

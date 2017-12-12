@@ -25,6 +25,9 @@ public class AppConfig {
 	public static String adminUser = "jimlu";
 	public static String adminPass = "zxcljm???123ws";
 	
-	// 超时时间为 30 秒
-	public static int outTime = 10;
+	// 超时时间为 60 秒
+	public static int outTime = 60;
+	// 登陆置信时间为 6小时 
+	public static int loginValidTime = 21600;
+	
 }
