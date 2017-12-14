@@ -89,7 +89,6 @@ public class UserController {
 			String userSignToken = TokenTool.getTokenByMap(userSign);
 			response.addCookie(new Cookie("userSign", userSignToken));
 			
-			System.out.println(userSignToken);
 			return userSignToken;
 		}
 		catch (Exception e) {
@@ -116,6 +115,7 @@ public class UserController {
 			if(!checkAddr(userSign, requset.getRemoteAddr()))
 				return "Ip changed, please press F5 to fresh and try again";
 			
+			System.out.println(">>>"+userSign.get("addr")+" "+requset.getRemoteAddr());
 			// 验证帐号权限
 			if(!userSign.get("username").equals(AppConfig.adminUser))
 				return "pleas login with admin accout!";
