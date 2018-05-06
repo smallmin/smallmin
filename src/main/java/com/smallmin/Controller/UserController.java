@@ -43,8 +43,9 @@ public class UserController {
 			String tokenStr = TokenTool.getTokenByMap(tempSign);
 			// 加入 cookie
 			Cookie cookie = new Cookie("tempSign", tokenStr);
+			
 			cookie.setMaxAge(AppConfig.outTime);
-			response.addCookie(new Cookie("tempSign",tokenStr));
+			response.addCookie(cookie);
 			return tokenStr;
 		}
 		catch (Exception e) {
@@ -67,8 +68,10 @@ public class UserController {
 			if(tempSignStr==null)
 				return "failed by tempSign missing, please press F5 to fresh and try again";
 			
+			System.out.println(tempSignStr);
 			// 解密token得到info map
-			Map tempSign = TokenTool.getMapByToken(tempSignStr);
+			Map tempSign = TokenTool.getMapByToken(tempSignStr); 
+			System.out.println(">>ok");
 			
 			// 验证info map的地址和时间的合法性
 			if(!checkTime(tempSign))
@@ -93,6 +96,7 @@ public class UserController {
 		}
 		catch (Exception e) {
 			// 有非法情况发生,需加到日志,待完成
+			System.out.println(e.getMessage());
 			return "failed by error, please concat to admin";
 		}
 	}
