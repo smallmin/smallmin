@@ -1,27 +1,16 @@
 package com.smallmin.Tool;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.Mac;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.hibernate.sql.ordering.antlr.GeneratedOrderByFragmentRendererTokenTypes;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smallmin.AppConfig;
 
@@ -67,7 +56,9 @@ public class TokenTool {
 	
 	private static Cipher getAESCipher(byte[] passwordBytes,int MODE) throws Exception {
 		KeyGenerator kgen = KeyGenerator.getInstance("AES");  
-        kgen.init(128, new SecureRandom(passwordBytes));  
+		SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");  // 此处对 Unix 系统支持
+        secureRandom.setSeed(passwordBytes);  
+        kgen.init(128, secureRandom);  
         SecretKey secretKey = kgen.generateKey();  
         byte[] enCodeFormat = secretKey.getEncoded();  
         SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
