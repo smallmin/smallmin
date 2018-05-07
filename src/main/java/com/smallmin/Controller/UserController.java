@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smallmin.App;
 import com.smallmin.AppConfig;
 import com.smallmin.Tool.CosTools;
 import com.smallmin.Tool.TokenTool;
@@ -167,5 +168,8 @@ public class UserController {
 		if(username.equals(AppConfig.adminUser)) userPasswordMD5HexStr = TokenTool.getMD5HexStr(AppConfig.adminPass);
 		return TokenTool.getMD5HexStr(tempSignStr + username + userPasswordMD5HexStr);
 	}
+	
+	
+	
 	
 }

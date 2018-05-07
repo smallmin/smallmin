@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<title>Qing::Info</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" charset="utf-8"/>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+		<script th:src="@{webjars/jquery/2.1.4/jquery.min.js}"></script>
+	</head>
+	
+	<style>
+		tr{
+			margin-top: 10px;
+		}
+		th{
+			width: 150px;
+			
+		}
+		
+	</style>
+	
+	
+	
+	<body>
+		
+		<div id="content" th:utext='${content}'>
+			content</div>
+		
+	</body>
+	
+	
+	
+	
+</html>

@@ -27,6 +27,9 @@ public class App
 	public static Map<Integer, Category> categorys = new HashMap<Integer, Category>() ;
 	
 	
+	public static Map<String, String> qing_log = new HashMap<String, String>() ;
+	
+	
 	
     public static void main( String[] args ) throws Exception
     {

@@ -33,6 +33,7 @@ public class TopicController {
 	public String editor(HttpServletRequest requset, Model model){
 		return "editor";
 	}
+	
 	@RequestMapping(value="/preview/{id}", method = RequestMethod.GET)
 	public String getPreview(HttpServletRequest requset, Model model,@PathVariable("id") int id){
 		TopicApi topicApi = new TopicApi();
@@ -50,4 +51,6 @@ public class TopicController {
 		response.addCookie(new Cookie("testCookie", "wahaha"));
 		return "sub/index";
 	}
+	
+	
 }
