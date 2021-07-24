@@ -53,7 +53,10 @@ public class FileTool {
 		}
 		return false;
 	}
-	
+	public static String[] getFileList(String path) {
+		return new File(path).list();
+	}
+
 	public static String readFile(String path,String name){
 		File file = new File(path+name);
 		try {

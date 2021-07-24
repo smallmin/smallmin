@@ -1,6 +1,6 @@
 create database smallmin;
 
-use database smallmin;
+use smallmin;
 
 create table category(
 	id int(8) NOT NULL primary key auto_increment,

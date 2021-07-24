@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import static java.lang.Math.*;
 
 import com.smallmin.Api.TopicApi;
 import com.smallmin.Tool.CosTools;  
@@ -34,6 +35,20 @@ public class TopicController {
 		return "editor";
 	}
 	
+	@RequestMapping(value="/preview", method = RequestMethod.GET)
+	public String getPreview(HttpServletRequest requset, Model model){
+		TopicApi topicApi = new TopicApi();
+		
+		String[] fileList = topicApi.getContentIds();
+		int maxId = 1;
+		for(String f : fileList) {
+			maxId = max(maxId, Integer.valueOf(f));
+		}
+		model.addAttribute("content", topicApi.getContentById(maxId));
+
+		return "preview";
+	}
+
 	@RequestMapping(value="/preview/{id}", method = RequestMethod.GET)
 	public String getPreview(HttpServletRequest requset, Model model,@PathVariable("id") int id){
 		TopicApi topicApi = new TopicApi();

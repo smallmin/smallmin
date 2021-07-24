@@ -26,7 +26,7 @@ input {
 </style>
 </head>
 <body style="padding: 0 20px;">
-	<h2>Topic Panel version 1.0</h2>
+	<h2>文章编辑器</h2>
 
 	<div style="font-size: 20px;">
 		Title: <input type="text" id="title" />
@@ -38,11 +38,9 @@ input {
 	</div>
 
 
-	<button id="insert" style="margin: 20px 0 0 0; padding: 10px;">Insert
-		data to repository.</button>
-	<a href="/preview/1">
-		<button style="margin: 20px 0 0 10px; padding: 10px;">View my
-			insert</button>
+	<button id="insert" style="margin: 20px 0 0 0; padding: 10px;">插入当前文章</button>
+	<a href="/preview">
+		<button style="margin: 20px 0 0 10px; padding: 10px;">查看最新文章</button>
 	</a>
 	<script type="text/javascript">
 		var editor = new wangEditor('editor-trigger');

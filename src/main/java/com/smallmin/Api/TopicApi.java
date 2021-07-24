@@ -7,7 +7,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,5 +52,10 @@ public class TopicApi {
 	@RequestMapping(value="/api/topic/content/{id}")
 	public String getContentById(@PathVariable("id") int id){
 		return FileTool.readFile(AppConfig.topicContentPath, String.valueOf(id));
+	}
+
+	@RequestMapping(value="/api/topic/content/ids")
+	public String[] getContentIds(){
+		return FileTool.getFileList(AppConfig.topicContentPath);
 	}
 }

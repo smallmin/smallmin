@@ -6,7 +6,7 @@ package com.smallmin;
 */
 public class AppConfig {
 	//移动数据文件夹时，只要修改此处的appDataFolder的路径即可。
-	public static String appDataFolder = "C:/smallminData/";
+	public static String appDataFolder = "data/";
 	
 	//以下为相应数据子目录
 	public static String topicContentPath=appDataFolder+"topic/content/"; //帖子内容
