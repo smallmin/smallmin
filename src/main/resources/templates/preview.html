@@ -1,28 +1,215 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
-<title>SmllMin:Editor</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>SmllMin:Editor</title>
+	<link th:include="/sub/headfile" />
+	<link rel="stylesheet" th:href="@{/css/sub/nav.css}" />
+	<link rel="stylesheet" th:href="@{/css/preview.css}" />
+	<link rel="stylesheet" th:href="@{/css/editor/code_github.css}" />
 
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
-<link rel="stylesheet" th:href="@{/css/editor/wangEditor.css}" />
-<link rel="stylesheet" th:href="@{/css/editor/code_github.css}" />
-
-<style>
-.wangEditor-container {
-	margin: 10px;
-	width: 100%;
-	height: 400px;
-	border: 0;
-}
-</style>
+	<style>
+		.wangEditor-container {
+			margin: 10px;
+			width: 100%;
+			height: 400px;
+			border: 0;
+		}
+	</style>
 </head>
 
-<body style="padding: 0 20px;">
-	<div class="wangEditor-container">
-		<div class="wangEditor-txt" id="content" th:utext='${content}'>
-			content</div>
+<body>
+	<div th:include="/sub/nav"></div>
+	<div class="container">
+
+		<h1 th:text="${title}"></h1>
+
+		<blockquote>
+			<p th:text="${introduction}"></p>
+		</blockquote>
+		<div th:utext='${content}'></div>
+		
+
+		
+		<div class="row comments">
+			
+			<div class="comment_num col-xs-12 col-sm-12 col-md-12 col-lg-1s2">
+				<h4>101条评论～</h4>
+				
+			</div>
+			
+			<div class="comment_input_box col-xs-12 col-sm-12 col-md-12 col-lg-1s2">
+				
+				<div class ="row">
+					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+						<input class="comment_input" placeholder="  请输入评论"/>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<input class="comment_input" placeholder="  署名 ID"/>
+					</div>
+					<div class ="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						<div class ="comment_post">发布</div>
+					</div>
+				</div>
+				
+			</div>
+			
+
+			<div class="row">
+
+				<div class="lcmt col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<img id="head_img" src="/img/profile/head_img.jpg" />
+				</div>
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					<div class="row">
+						<div class="cmt_title col-xs-8 col-sm-8 col-md-10 col-lg-10">
+							Smallmin
+						</div>
+						<div class="cmt_time col-xs-4 col-sm-4 col-md-2 col-lg-2 ">
+							2021-07-01
+						</div>
+
+					</div>
+
+					<div class="cmt">
+						Smallmin，Smallmin，Smallmin，Smallmin，Smallmin，Smallmin，Smallmin,太帅了！支持你！加油！你太棒了！
+					</div>
+					<div class="recommend">
+						👍 ｜ 👋 ｜ 👌
+					</div>
+				</div>
+
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+
+				</div>
+
+
+			</div>
+		</div>
+
+		<div th:include="/sub/tail"></div>
 	</div>
+
 </body>
+<style>
+	.comments {
+		box-shadow: 0px 0px 2px #aaa;
+		border-radius: 2px;
+		padding-bottom: 10px;
+	}
+	.comment_post{
+		box-shadow: 0px 1px 2px #aaa;
+		background-color: #90bcec;
+		color: white;
+		width: 100%;
+		height: 25px;
+		font-weight: bold;
+		line-height: 24px;
+		max-width: 100px;
+	
+		text-align: center;
+	}
+	.comment_input{
+		width: 100%;
+	}
+	.comment_num {
+		padding-left: 40px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		margin-bottom: 10px;
+		box-shadow: 0px 0.5px 0.5px #ccc;
+		
+	}
+	.comment_input_box {
+		padding-left: 40px;
+		padding-top: 10px;
+		padding-bottom: 15px;
+		margin-bottom: 10px;
+		box-shadow: 0px 0.5px 0.5px #ccc;
+		
+	}
+	.cmt_title {
+		font-size: 25px;
+	}
+
+	.cmt_time {
+		padding-top: 6px;
+		text-align: right;
+		padding-right: 40px;
+		color: #888;
+	}
+
+	.recommend {
+		padding-top: 6px;
+		padding-bottom: 4px;
+	}
+
+	.cmt {
+		padding-top: 5px;
+		padding-left: 2px;
+		padding-right: 10px;
+	}
+
+	.lcmt {
+		text-align: right;
+		padding-right: 0px;
+
+	}
+
+	#head_img {
+
+		width: 80%;
+		max-width: 80px;
+		border-radius: 50%;
+		box-shadow: 0px 0px 1px #aaa;
+	}
+	/* table 样式 */
+	table {
+		border-top: 1px solid #ccc;
+		border-left: 1px solid #ccc;
+	}
+	table td,
+	table th {
+		border-bottom: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		padding: 3px 5px;
+	}
+	table th {
+		border-bottom: 2px solid #ccc;
+		text-align: center;
+	}
+	
+	/* blockquote 样式 */
+	blockquote {
+		display: block;
+		border-left: 8px solid #d0e5f2;
+		padding: 5px 10px;
+		margin: 10px 0;
+		line-height: 1.4;
+		font-size: 100%;
+		background-color: #f1f1f1;
+	}
+	
+	/* code 样式 */
+	code {
+		display: inline-block;
+		*display: inline;
+		*zoom: 1;
+		background-color: #f1f1f1;
+		border-radius: 3px;
+		padding: 3px 5px;
+		margin: 0 3px;
+	}
+	pre code {
+		display: block;
+	}
+	
+	/* ul ol 样式 */
+	ul, ol {
+		margin: 10px 0 10px 20px;
+	}
+</style>
 
 </html>

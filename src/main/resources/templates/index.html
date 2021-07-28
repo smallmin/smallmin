@@ -3,54 +3,48 @@
 	<head>
 		<title>SmllMin::Home</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" charset="utf-8"/>
-		<link th:include="sub/headfile"/>
-		<link rel="stylesheet" th:href="@{css/index.css}" />
+		<link th:include="/sub/headfile"/>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
 	</head>
 	
 	<body>
-		<div th:include="sub/nav"></div>
+		<div th:include="/sub/nav"></div>
 		<div class="container">
 			<div class="row">
 				<div class="myleft col-xs-12 col-sm-2 col-md-2 col-lg-2">
-					<div th:include="sub/profile"></div>
+					<div th:include="/sub/profile"></div>
 				</div>
-				<div class="myright col-xs-12 col-sm-10 col-md-10 col-lg-10">
-				
-					<div class="sheet">
-						<div class="title">
-							<div class="square"></div>
-							工作三年，读了200多本书，我想跟你分享这几本
-						
-						</div>
-						<div>
-							离开大学校园已经有三年多的时间了，看到有很多小伙伴在大学期间做了各种有意义的事，比如旅行、做公益、写作。所以我要推荐你这几本书：...
-						</div>
-					</div>
-					
-					<div class="sheet">
-						<div class="title">
-							<div class="square"></div>
-							工作三年，读了200多本书，我想跟你分享这几本
-						
-						</div>
-						<div>
-							离开大学校园已经有三年多的时间了，看到有很多小伙伴在大学期间做了各种有意义的事，比如旅行、做公益、写作。所以我要推荐你这几本书：...
-						</div>
-					</div>
-					<div class="sheet">
-						<div class="title">
-							<div class="square"></div>
-							工作三年，读了200多本书，我想跟你分享这几本
-						
-						</div>
-						<div>
-							离开大学校园已经有三年多的时间了，看到有很多小伙伴在大学期间做了各种有意义的事，比如旅行、做公益、写作。所以我要推荐你这几本书：...
-						</div>
-					</div>
-					
+				<div class="myright col-xs-12 col-sm-10 col-md-10 col-lg-10" >
+					<div th:utext='${searchKey}'> </div>
+					<div th:utext='${pageTopics}'></div>
+					<div th:utext='${pageSelect}'></div>
 					
 				</div>
 			</div>
+			
+			<div class= "row">
+				<div class = "friends">
+					
+					<h3>友情链接</h3>
+					<div class= "row">
+						zxcljm.com  ringo.com  wahaha.com  yixixi.com
+					</div>
+
+				</div>
+
+			</div>
+			
 		</div>
+		
+		<div th:include="/sub/tail"></div>
+
+		
+		
 	</body>
 </html>
+
+<style>
+	.friends{
+		text-align: center;
+	}
+</style>

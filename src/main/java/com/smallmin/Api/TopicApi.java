@@ -33,6 +33,8 @@ public class TopicApi {
 	public Collection<Topic> getAll(){
 		return topicService.getAll();
 	}
+
+	
 	
 	@RequestMapping(value="/api/topic", method = RequestMethod.POST)
 	public Topic test(HttpServletRequest requset){
@@ -42,8 +44,9 @@ public class TopicApi {
 		topic.setTitle(requset.getParameter("title"));
 		topic.setAuthorId(1);
 		topic.setCategoryId(0);
+		topic.setIntroduction(requset.getParameter("introduction"));
 		topic = topicService.add(topic);
-		
+
 		if(FileTool.createFile(AppConfig.topicContentPath, requset.getParameter("content"), String.valueOf(topic.getId())))
 			System.out.println(">>>>>>>>>>>>>>>>>>>> 文件 " +String.valueOf(topic.getId())+ " 创建成功");
 		return topic;

@@ -23,6 +23,7 @@ public class Topic {
 	private int id;
 	
 	private String title;
+	private String introduction;
 	private int authorId;
 	private int categoryId;
 	private int priority;
@@ -75,5 +76,11 @@ public class Topic {
 	}
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 }

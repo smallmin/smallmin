@@ -13,6 +13,7 @@
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
+	
 	</properties>
 
 
@@ -53,8 +54,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-
-			<version>8.0.13</version>
+			<version>8.0.26</version>
 		</dependency>
 		
 		<!-- Add change file support -->
@@ -78,7 +78,7 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>3.3.4</version>
+			<version>5.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -164,6 +164,19 @@
 	                <include>static/fonts/**</include>
 	            </includes>
        		</resource>
+			   <resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+
 		</resources>
 
 		<plugins>

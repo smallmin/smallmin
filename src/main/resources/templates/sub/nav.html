@@ -1,4 +1,4 @@
-<link rel="stylesheet" th:href="@{css/sub/nav.css}" />
+<link rel="stylesheet" th:href="@{/css/sub/nav.css}" />
 <div class="my-nav">
 	<div class="container">
 		<nav class="navbar">
@@ -13,7 +13,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="/">
-						Will be happy ლ(・ω・ლ)
+						🌍 大哲个人博客系统 ～～
 					</a>
 				</div>
 
@@ -23,10 +23,20 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<form action="/preview/1" class="search">
-								<input class="input-box" type="text"  placeholder="Search"/>
+							<form action="/search" class="search" method="get">
+								<input class="input-box" type="text" name="key"  placeholder="Search"/>
 							</form>
 						</li>
+						<li>
+							<a class="navbar-brand" href="/editor">
+								(新增)
+							</a>
+
+							<a class="navbar-brand" href="/preview">
+								(查阅)
+							</a>
+						</li>
+						
 						<!-- 
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
