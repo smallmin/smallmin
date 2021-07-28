@@ -27,7 +27,7 @@ public class TokenTool {
 	}
 	
 	public static String encodeBase64(byte[]input) throws Exception{  
-	    Class clazz=Class.forName("com.sun.org.apache.xerces.internal.impl.dv.util.Base64");  
+	    Class<?> clazz=Class.forName("com.sun.org.apache.xerces.internal.impl.dv.util.Base64");  
 	    Method mainMethod= clazz.getMethod("encode", byte[].class);  
 	    mainMethod.setAccessible(true);  
 	    Object retObj=mainMethod.invoke(null, new Object[]{input});  
@@ -35,7 +35,7 @@ public class TokenTool {
 	}
 	
 	public static byte[] decodeBase64(String input) throws Exception{  
-        Class clazz=Class.forName("com.sun.org.apache.xerces.internal.impl.dv.util.Base64");  
+        Class<?> clazz=Class.forName("com.sun.org.apache.xerces.internal.impl.dv.util.Base64");  
         Method mainMethod= clazz.getMethod("decode", String.class);  
         mainMethod.setAccessible(true);  
         Object retObj=mainMethod.invoke(null, input);  
@@ -49,7 +49,7 @@ public class TokenTool {
 		return mapper.writeValueAsString(map);
 	}
 	
-	public static Map getMapByJson(String jsonStr) throws Exception {
+	public static Map<?,?> getMapByJson(String jsonStr) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.readValue(jsonStr, Map.class);
 	}
@@ -83,7 +83,7 @@ public class TokenTool {
 		return encodeBase64(cryptBytes);
 	}
 	
-	public static Map getMapByToken(String tokenStr) throws Exception {
+	public static Map<?,?> getMapByToken(String tokenStr) throws Exception {
 		byte[] originBytes = AES_decrypt(decodeBase64(tokenStr));
 		String jsonStr = new String(originBytes,"utf-8");
 		return getMapByJson(jsonStr);

@@ -5,9 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.smallmin.Dao.TagDao;
 import com.smallmin.Dao.TopicDao;
-import com.smallmin.Enity.Tag;
 import com.smallmin.Enity.Topic;
 
 /** 

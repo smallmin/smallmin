@@ -39,6 +39,7 @@ public class FileTool {
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			fos.write(content.getBytes());
+			fos.close();
 			return true;
 		} catch (Exception  e) {
 			e.printStackTrace();
@@ -64,6 +65,7 @@ public class FileTool {
 			byte[] data = new byte[(int) file.length()];
 			fio.read(data);
 			String content = new String(data);
+			fio.close();
 			return content;
 		} catch (Exception e) {
 			e.printStackTrace();

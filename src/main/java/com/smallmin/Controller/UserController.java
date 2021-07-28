@@ -69,7 +69,7 @@ public class UserController {
 				return "failed by tempSign missing, please press F5 to fresh and try again";
 		
 			// 解密token得到info map
-			Map tempSign = TokenTool.getMapByToken(tempSignStr); 
+			Map<?,?> tempSign = TokenTool.getMapByToken(tempSignStr); 
 			
 			// 验证info map的地址和时间的合法性
 			if(!checkTime(tempSign))
@@ -108,7 +108,7 @@ public class UserController {
 				return "please login first!";
 			
 			// 解密token得到info map
-			Map userSign = TokenTool.getMapByToken(userSignStr);
+			Map<?,?> userSign = TokenTool.getMapByToken(userSignStr);
 			
 			// 验证info map的地址和时间的合法性
 			if(!checkTime(userSign))
@@ -144,7 +144,7 @@ public class UserController {
 		return null;
 	}
 	
-	private boolean checkTime(final Map infoMap) {
+	private boolean checkTime(final Map<?,?> infoMap) {
 		// validate time in info map
 		String validTimeStr = (String) infoMap.get("validTime");
 		long validTime=0, currentTime = System.currentTimeMillis()/1000;
@@ -153,7 +153,7 @@ public class UserController {
 		return false;	
 	}
 	
-	private boolean checkAddr(final Map infoMap, final String remoteAddr) {
+	private boolean checkAddr(final Map<?,?> infoMap, final String remoteAddr) {
 		// validate address in info map
 		String validAddr = (String) infoMap.get("addr");
 		if(validAddr.equals(remoteAddr))return true;
